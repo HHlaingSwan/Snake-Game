@@ -213,7 +213,7 @@ body::before {
 .touch-controls-row {
     display: flex;
     justify-content: center;
-    margin: 5px 0;
+    margin: 15px 0;
     width: 100%;
 }
 
@@ -224,7 +224,7 @@ body::before {
     font-size: 1.5rem;
     width: 60px;
     height: 60px;
-    margin: 0 5px;
+    margin: 0 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -232,6 +232,8 @@ body::before {
     user-select: none;
     transition: background-color 0.2s, transform 0.1s;
     font-family: 'Press Start 2P', cursive;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+    touch-action: manipulation;
 }
 
 .control-btn:active {
