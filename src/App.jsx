@@ -202,6 +202,45 @@ const App = () => {
 		return grid;
 	};
 
+	// Handle touch controls for mobile/tablet
+	const handleDirectionChange = (newDirection) => {
+		// Prevent opposite directions
+		switch (newDirection) {
+			case Direction.UP:
+				if (directionRef.current !== Direction.DOWN) {
+					setDirection(Direction.UP);
+					directionRef.current = Direction.UP;
+				}
+				break;
+			case Direction.DOWN:
+				if (directionRef.current !== Direction.UP) {
+					setDirection(Direction.DOWN);
+					directionRef.current = Direction.DOWN;
+				}
+				break;
+			case Direction.LEFT:
+				if (directionRef.current !== Direction.RIGHT) {
+					setDirection(Direction.LEFT);
+					directionRef.current = Direction.LEFT;
+				}
+				break;
+			case Direction.RIGHT:
+				if (directionRef.current !== Direction.LEFT) {
+					setDirection(Direction.RIGHT);
+					directionRef.current = Direction.RIGHT;
+				}
+				break;
+			default:
+				break;
+		}
+	};
+
+	// Toggle pause function
+	const togglePause = () => {
+		setIsPaused((prev) => !prev);
+		isPausedRef.current = !isPausedRef.current;
+	};
+
 	return (
 		<div className='snake-game-container'>
 			<h1>Snake Game</h1>
@@ -212,7 +251,7 @@ const App = () => {
 			</div>
 
 			<div className='game-layout'>
-				<div className='controls-info left'>
+				<div className='controls-info  left'>
 					<p>Use arrow keys to move</p>
 					<p>Press Space to pause</p>
 				</div>
@@ -234,10 +273,60 @@ const App = () => {
 					)}
 				</div>
 
-				<div className='controls-info right'>
+				<div className='controls-info  right'>
 					<p>Press R to restart</p>
 					<p>when game over</p>
 				</div>
+			</div>
+
+			{/* Mobile/Tablet Touch Controls */}
+			<div className='touch-controls'>
+				<div className='touch-controls-row'>
+					<button
+						className='control-btn up-btn'
+						onClick={() => handleDirectionChange(Direction.UP)}
+						aria-label='Move Up'>
+						▲
+					</button>
+				</div>
+				<div className='touch-controls-row'>
+					<button
+						className='control-btn left-btn'
+						onClick={() => handleDirectionChange(Direction.LEFT)}
+						aria-label='Move Left'>
+						◀
+					</button>
+					<button
+						className='control-btn pause-btn'
+						onClick={togglePause}
+						aria-label='Pause Game'>
+						{isPaused ? "▶" : "❚❚"}
+					</button>
+					<button
+						className='control-btn right-btn'
+						onClick={() => handleDirectionChange(Direction.RIGHT)}
+						aria-label='Move Right'>
+						▶
+					</button>
+				</div>
+				<div className='touch-controls-row'>
+					<button
+						className='control-btn down-btn'
+						onClick={() => handleDirectionChange(Direction.DOWN)}
+						aria-label='Move Down'>
+						▼
+					</button>
+				</div>
+				{gameOver && (
+					<div className='touch-controls-row'>
+						<button
+							className='control-btn restart-btn'
+							onClick={resetGame}
+							aria-label='Restart Game'>
+							Restart
+						</button>
+					</div>
+				)}
 			</div>
 		</div>
 	);

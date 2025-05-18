@@ -199,6 +199,72 @@ body::before {
     letter-spacing: 2px;
 }
 
+/* Touch Controls for Mobile/Tablet */
+.touch-controls {
+    display: none;
+    /* Hidden by default, shown on mobile/tablet */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.touch-controls-row {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+    width: 100%;
+}
+
+.control-btn {
+    background-color: #1a1a1a;
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    font-size: 1.5rem;
+    width: 60px;
+    height: 60px;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s, transform 0.1s;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.control-btn:active {
+    background-color: #333;
+    transform: scale(0.95);
+}
+
+.restart-btn {
+    width: 120px;
+    font-size: 0.9rem;
+    background-color: #333;
+}
+
+.pause-btn {
+    font-size: 1rem;
+}
+
+/* Media query for mobile and tablet devices */
+@media (max-width: 768px) {
+    .touch-controls {
+        display: flex;
+    }
+
+    .controls-info {
+        display: none;
+        /* Hide keyboard instructions on mobile */
+    }
+
+    .game-layout {
+        flex-direction: column;
+    }
+}
+
 .game-over p {
     color: var(--text-color);
     margin-bottom: 25px;
@@ -282,10 +348,12 @@ body::before {
 
     .controls-info.left {
         order: 2;
+        display: none;
     }
 
     .controls-info.right {
         order: 3;
+        display: none;
     }
 
     .game-board {
